@@ -9,7 +9,7 @@
         <meta name="description" content="">
         <meta name="author" content="">
 
-        <title>Event</title>
+        <title>User</title>
 
         <link href="<?php echo base_url('assets/bootstrap/css/bootstrap.min.css') ?>" rel="stylesheet">
         <link href="<?php echo base_url('assets/datatables/css/dataTables.bootstrap.css') ?>" rel="stylesheet">
@@ -29,8 +29,8 @@
                     <div id="navbar" class="navbar-collapse collapse">
                         <ul class="nav navbar-nav">
                             <li><a href="<?php echo base_url('home') ?>">Home</a></li>
-                            <li class="active"><a href="<?php echo base_url('event') ?>">Event</a></li>
-                            <li><a href="<?php echo base_url('user') ?>">User</a></li>
+                            <li><a href="<?php echo base_url('event') ?>">Event</a></li>
+                            <li class="active"><a href="<?php echo base_url('user') ?>">User</a></li>
                         </ul>
                         <ul class="nav navbar-nav navbar-right">
                             <li><a href="<?php echo base_url('signin/out') ?>">Signout</a></li>
@@ -39,20 +39,24 @@
                 </div><!--/.container-fluid -->
             </nav>
 
-            <h3>Event Data</h3>
+            <h3>User Data</h3>
             <br />
-            <button class="btn btn-success" onclick="add_event()"><i class="glyphicon glyphicon-plus"></i> Add Event</button>
+            <button class="btn btn-success" onclick="add_user()"><i class="glyphicon glyphicon-plus"></i> Add User</button>
             <br />
             <br />
             <table id="table" class="table table-striped table-bordered" cellspacing="0" width="100%">
                 <thead>
                     <tr>
-                        <th>Event Name</th>
-                        <th>Start Date</th>
-                        <th>End Date</th>
-                        <th>Device</th>
-                        <th>Version</th>
-                        <th>Status</th>
+                        <th>Facebook ID</th>
+                        <th>Display Name</th>
+                        <th>Networth</th>
+                        <th>Networth_2</th>
+                        <th>Networth_pow</th>
+                        <th>App Version</th>
+                        <th>Device Type</th>
+                        <th>Country</th>
+<!--                        <th>Create Time</th>
+                        <th>Update Time</th>-->
                         <th style="width:150px;">Action</th>
                     </tr>
                 </thead>
@@ -61,12 +65,16 @@
 
                 <tfoot>
                     <tr>
-                        <th>Event Name</th>
-                        <th>Start Date</th>
-                        <th>End Date</th>
-                        <th>Device</th>
-                        <th>Version</th>
-                        <th>Status</th>
+                        <th>Facebook ID</th>
+                        <th>Display Name</th>
+                        <th>Networth</th>
+                        <th>Networth_2</th>
+                        <th>Networth_pow</th>
+                        <th>App Version</th>
+                        <th>Device Type</th>
+                        <th>Country</th>
+<!--                        <th>Create Time</th>
+                        <th>Update Time</th>-->
                         <th>Action</th>
                     </tr>
                 </tfoot>
@@ -89,7 +97,7 @@
 
                         // Load data for the table's content from an Ajax source
                         "ajax": {
-                            "url": "<?php echo site_url('event/ajax_list') ?>",
+                            "url": "<?php echo site_url('user/ajax_list') ?>",
                             "type": "POST"
                         },
                         //Set column definition initialisation properties.
@@ -102,37 +110,41 @@
                     });
                 });
 
-                function add_event()
+                function add_user()
                 {
                     save_method = 'add';
                     $('#form')[0].reset(); // reset form on modals
                     $('#modal_form').modal('show'); // show bootstrap modal
-                    $('.modal-title').text('Add Event'); // Set Title to Bootstrap modal title
+                    $('.modal-title').text('Add User'); // Set Title to Bootstrap modal title
                 }
 
-                function edit_event(id)
+                function edit_user(id)
                 {
                     save_method = 'update';
                     $('#form')[0].reset(); // reset form on modals
 
                     //Ajax Load data from ajax
                     $.ajax({
-                        url: "<?php echo site_url('event/ajax_edit/') ?>/" + id,
+                        url: "<?php echo site_url('user/ajax_edit/') ?>/" + id,
                         type: "GET",
                         dataType: "JSON",
                         success: function (data)
                         {
 
-                            $('[name="event_id"]').val(data.event_id);
-                            $('[name="event_name"]').val(data.event_name);
-                            $('[name="start_date"]').val(data.start_date);
-                            $('[name="end_date"]').val(data.end_date);
-                            $('[name="device"]').val(data.device);
-                            $('[name="version"]').val(data.version);
-                            $('[name="status"]').val(data.status);
+                            $('[name="facebook_id_0"]').val(data.facebook_id);
+                            $('[name="facebook_id"]').val(data.facebook_id);
+                            $('[name="display_name"]').val(data.display_name);
+                            $('[name="networth"]').val(data.networth);
+                            $('[name="networth_2"]').val(data.networth_2);
+                            $('[name="networth_pow"]').val(data.networth_pow);
+                            $('[name="appVersion"]').val(data.appVersion);
+                            $('[name="device_type"]').val(data.device_type);
+                            $('[name="country"]').val(data.country);
+//                            $('[name="create_time"]').val(data.create_time);
+//                            $('[name="update_time"]').val(data.update_time);
 
                             $('#modal_form').modal('show'); // show bootstrap modal when complete loaded
-                            $('.modal-title').text('Edit Event'); // Set title to Bootstrap modal title
+                            $('.modal-title').text('Edit User'); // Set title to Bootstrap modal title
 
                         },
                         error: function (jqXHR, textStatus, errorThrown)
@@ -152,10 +164,10 @@
                     var url;
                     if (save_method == 'add')
                     {
-                        url = "<?php echo site_url('event/ajax_add') ?>";
+                        url = "<?php echo site_url('user/ajax_add') ?>";
                     } else
                     {
-                        url = "<?php echo site_url('event/ajax_update') ?>";
+                        url = "<?php echo site_url('user/ajax_update') ?>";
                     }
 
                     // ajax adding data to database
@@ -177,13 +189,13 @@
                     });
                 }
 
-                function delete_event(id)
+                function delete_user(id)
                 {
                     if (confirm('Are you sure delete this data?'))
                     {
                         // ajax delete data to database
                         $.ajax({
-                            url: "<?php echo site_url('event/ajax_delete') ?>/" + id,
+                            url: "<?php echo site_url('user/ajax_delete') ?>/" + id,
                             type: "POST",
                             dataType: "JSON",
                             success: function (data)
@@ -209,54 +221,72 @@
                 <div class="modal-content">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                        <h3 class="modal-title">Event Form</h3>
+                        <h3 class="modal-title">User Form</h3>
                     </div>
                     <div class="modal-body form">
                         <form action="#" id="form" class="form-horizontal">
-                            <input type="hidden" value="" name="event_id"/>
+                            <input type="hidden" value="" name="facebook_id_0"/>
                             <div class="form-body">
                                 <div class="form-group">
-                                    <label class="control-label col-md-3">Event Name</label>
+                                    <label class="control-label col-md-3">Facebook ID</label>
                                     <div class="col-md-9">
-                                        <input name="event_name" placeholder="Event Name" class="form-control" type="text">
+                                        <input name="facebook_id" placeholder="Facebook ID" class="form-control" type="text">
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label class="control-label col-md-3">Start Date</label>
+                                    <label class="control-label col-md-3">Display Name</label>
                                     <div class="col-md-9">
-                                        <input name="start_date" placeholder="yyyy-mm-dd" class="form-control" type="date">
+                                        <input name="display_name" placeholder="Display Name" class="form-control" type="text">
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label class="control-label col-md-3">End Date</label>
+                                    <label class="control-label col-md-3">Networth</label>
                                     <div class="col-md-9">
-                                        <input name="end_date" placeholder="yyyy-mm-dd" class="form-control" type="date">
+                                        <input name="networth" placeholder="Networth" class="form-control" type="number">
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label class="control-label col-md-3">Device</label>
+                                    <label class="control-label col-md-3">Networth 2</label>
                                     <div class="col-md-9">
-                                        <select name="device" class="form-control">
-                                            <option value="Android">Android</option>
-                                            <option value="IOS">IOS</option>
-                                        </select>
+                                        <input name="networth_2" placeholder="Networth 2" class="form-control" type="number">
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label class="control-label col-md-3">Version</label>
+                                    <label class="control-label col-md-3">Networth Pow</label>
                                     <div class="col-md-9">
-                                        <textarea name="version" placeholder="Version"class="form-control"></textarea>
+                                        <input name="networth_pow" placeholder="Networth Pow" class="form-control" type="number">
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label class="control-label col-md-3">Status</label>
+                                    <label class="control-label col-md-3">App Version</label>
                                     <div class="col-md-9">
-                                        <select name="status" class="form-control">
-                                            <option value="Active">Active</option>
-                                            <option value="Inactive">Inactive</option>
-                                        </select>
+                                        <input name="appVersion" placeholder="App Version" class="form-control" type="text">
                                     </div>
                                 </div>
+                                <div class="form-group">
+                                    <label class="control-label col-md-3">Device Type</label>
+                                    <div class="col-md-9">
+                                        <input name="device_type" placeholder="Device Type" class="form-control" type="text">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label col-md-3">Country</label>
+                                    <div class="col-md-9">
+                                        <input name="country" placeholder="Country" class="form-control" type="text">
+                                    </div>
+                                </div>
+<!--                                <div class="form-group">
+                                    <label class="control-label col-md-3">Create Time</label>
+                                    <div class="col-md-9">
+                                        <input name="create_time" placeholder="yyyy-mm-dd hh:ii:ss" class="form-control" type="datetime">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label col-md-3">Update Time</label>
+                                    <div class="col-md-9">
+                                        <input name="update_time" placeholder="yyyy-mm-dd hh:ii:ss" class="form-control" type="datetime">
+                                    </div>
+                                </div>-->
                             </div>
                         </form>
                     </div>

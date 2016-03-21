@@ -6,11 +6,13 @@ class Home extends CI_Controller {
 
     public function __construct() {
         parent::__construct();
+        if (!isset($_SESSION['signin'])) {
+            redirect('signin');
+        }
 //        $this->load->model('home_model', 'home');
     }
 
     public function index() {
-        $this->load->helper('url');
         $this->load->view('home_view');
     }
 

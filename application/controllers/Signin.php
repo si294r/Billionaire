@@ -6,12 +6,25 @@ class Signin extends CI_Controller {
 
     public function __construct() {
         parent::__construct();
-//        $this->load->model('signin_model', 'signin');
+        $this->load->model('admin_model', 'admin');
     }
 
     public function index() {
-        $this->load->helper('url');
-        $this->load->view('signin_view');
+        $data['message'] = "";
+        if (isset($_POST['username']) && isset($_POST['password'])) {
+            $data = $this->admin->signin($_POST['username'], $_POST['password']);
+            if (is_object($data)) {
+                $_SESSION['signin'] = $data;    
+                redirect('home');
+            } else {
+                $data['message'] = "Sign In Failed.";
+            }
+        }
+        $this->load->view('signin_view', $data);
     }
 
+    public function out() {
+        session_destroy();
+        redirect('signin');
+    }
 }

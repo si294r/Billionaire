@@ -6,11 +6,13 @@ class Event extends CI_Controller {
 
     public function __construct() {
         parent::__construct();
+        if (strtolower($this->router->fetch_method()) != 'get' && !isset($_SESSION['signin'])) {
+            redirect('signin');
+        }
         $this->load->model('event_model', 'event');
     }
 
     public function index() {
-        $this->load->helper('url');
         $this->load->view('event_view');
     }
 
@@ -29,8 +31,8 @@ class Event extends CI_Controller {
             $row[] = $event->status;
 
             //add html for action
-            $row[] = '<a class="btn btn-sm btn-primary" href="javascript:void()" title="Edit" onclick="edit_event(' . "'" . $event->t_event_id . "'" . ')"><i class="glyphicon glyphicon-pencil"></i> Edit</a>
-                  <a class="btn btn-sm btn-danger" href="javascript:void()" title="Hapus" onclick="delete_event(' . "'" . $event->t_event_id . "'" . ')"><i class="glyphicon glyphicon-trash"></i> Delete</a>';
+            $row[] = '<a class="btn btn-sm btn-primary" href="javascript:void()" title="Edit" onclick="edit_event(' . "'" . $event->event_id . "'" . ')"><i class="glyphicon glyphicon-pencil"></i> Edit</a>
+                  <a class="btn btn-sm btn-danger" href="javascript:void()" title="Hapus" onclick="delete_event(' . "'" . $event->event_id . "'" . ')"><i class="glyphicon glyphicon-trash"></i> Delete</a>';
 
             $data[] = $row;
         }
@@ -72,13 +74,27 @@ class Event extends CI_Controller {
             'version' => $this->input->post('version'),
             'status' => $this->input->post('status')
         );
-        $this->event->update(array('t_event_id' => $this->input->post('t_event_id')), $data);
+        $this->event->update(array('event_id' => $this->input->post('event_id')), $data);
         echo json_encode(array("status" => TRUE));
     }
 
     public function ajax_delete($id) {
         $this->event->delete_by_id($id);
         echo json_encode(array("status" => TRUE));
+    }
+
+    public function get($device, $version) {
+        $json['current_time'] = date('Y-m-d H:i:s');
+        $json['device'] = $device;
+        $json['version'] = $version;
+        
+        $data = $this->event->get_event($device, $version);
+        if (is_object($data)) {
+            $json['event_time']['start'] = $data->start_date;
+            $json['event_time']['end'] = $data->end_date;
+        }
+        
+        echo json_encode($json);
     }
 
 }

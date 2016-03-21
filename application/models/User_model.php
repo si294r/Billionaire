@@ -2,11 +2,11 @@
 
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Event_model extends CI_Model {
+class User_model extends CI_Model {
 
-    var $table = 'event';
-    var $column = array('event_name', 'start_date', 'end_date', 'device', 'version', 'status');
-    var $order = array('event_id' => 'desc');
+    var $table = 'user';
+    var $column = array('facebook_id', 'display_name', 'networth', 'networth_2', 'networth_pow', 'appVersion', 'device_type', 'country', 'create_time', 'update_time');
+    var $order = array('facebook_id' => 'desc');
 
     private function _get_datatables_query() {
         $this->db->from($this->table);
@@ -47,7 +47,7 @@ class Event_model extends CI_Model {
 
     public function get_by_id($id) {
         $this->db->from($this->table);
-        $this->db->where('event_id', $id);
+        $this->db->where('facebook_id', $id);
         $query = $this->db->get();
 
         return $query->row();
@@ -64,15 +64,8 @@ class Event_model extends CI_Model {
     }
 
     public function delete_by_id($id) {
-        $this->db->where('event_id', $id);
+        $this->db->where('facebook_id', $id);
         $this->db->delete($this->table);
-    }
-
-    public function get_event($device, $version) {
-        $this->db->from($this->table);
-        $this->db->where(array('device' => $device, 'version' => $version, 'status' => 'active'));
-        $query = $this->db->get();
-        return $query->row();
     }
 
 }
