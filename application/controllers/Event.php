@@ -84,6 +84,9 @@ class Event extends CI_Controller {
     }
 
     public function get($device, $version, $debug = 0) {
+        if ($debug == 1) {
+            $this->event->table = str_replace("_prod", "_dev", $this->db->database) . "." . $this->event->table;
+        }
         $json['current_time'] = date('Y-m-d H:i:s');
         $json['device'] = $device;
         $json['version'] = $version;

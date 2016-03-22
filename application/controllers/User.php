@@ -89,6 +89,9 @@ class User extends CI_Controller {
     }
 
     public function update_data($facebook_id, $display_name, $networth, $networth_2, $networth_pow, $appVersion, $device_type, $debug = 0) {
+        if ($debug == 1) {
+            $this->user->table = str_replace("_prod", "_dev", $this->db->database) . "." . $this->user->table;
+        }
         $data = array(
             'facebook_id' => $facebook_id,
             'display_name' => $display_name,
@@ -109,6 +112,9 @@ class User extends CI_Controller {
     }
 
     public function update_country($facebook_id, $country, $debug = 0) {
+        if ($debug == 1) {
+            $this->user->table = str_replace("_prod", "_dev", $this->db->database) . "." . $this->user->table;
+        }
         $data = array('country' => $country);
         $where = array('facebook_id' => $facebook_id);
         $this->user->update($where, $data);
