@@ -88,7 +88,7 @@ class User extends CI_Controller {
         echo json_encode(array("status" => TRUE));
     }
 
-    public function update_data($facebook_id, $display_name, $networth, $networth_2, $networth_pow, $appVersion, $device_type) {
+    public function update_data($facebook_id, $display_name, $networth, $networth_2, $networth_pow, $appVersion, $device_type, $debug = 0) {
         $data = array(
             'facebook_id' => $facebook_id,
             'display_name' => $display_name,
@@ -104,18 +104,18 @@ class User extends CI_Controller {
         } else {
             $this->user->save($data);
         }
-        
-        echo json_encode($data);        
+
+        echo json_encode($data);
     }
 
-    public function update_country($facebook_id, $country, $flag, $debug) {
+    public function update_country($facebook_id, $country, $debug = 0) {
         $data = array('country' => $country);
         $where = array('facebook_id' => $facebook_id);
         $this->user->update($where, $data);
 
         $json['facebook_id'] = $facebook_id;
         $json['country'] = $country;
-        return json_encode($json);
+        echo json_encode($json);
     }
 
 }

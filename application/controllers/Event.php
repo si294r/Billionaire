@@ -83,17 +83,17 @@ class Event extends CI_Controller {
         echo json_encode(array("status" => TRUE));
     }
 
-    public function get($device, $version) {
+    public function get($device, $version, $debug = 0) {
         $json['current_time'] = date('Y-m-d H:i:s');
         $json['device'] = $device;
         $json['version'] = $version;
-        
+
         $data = $this->event->get_event($device, $version);
         if (is_object($data)) {
             $json['event_time']['start'] = $data->start_date;
             $json['event_time']['end'] = $data->end_date;
         }
-        
+
         echo json_encode($json);
     }
 

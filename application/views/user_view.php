@@ -28,9 +28,22 @@
                     </div>
                     <div id="navbar" class="navbar-collapse collapse">
                         <ul class="nav navbar-nav">
-                            <li><a href="<?php echo base_url('home') ?>">Home</a></li>
-                            <li><a href="<?php echo base_url('event') ?>">Event</a></li>
-                            <li class="active"><a href="<?php echo base_url('user') ?>">User</a></li>
+                            <?php $class = strtolower($this->router->fetch_class()); ?>
+                            <li class="<?php echo $class == 'home' ? 'active' : '' ?>">
+                                <a href="<?php echo base_url('home') ?>">Home</a>
+                            </li>
+                            <li class="<?php echo $class == 'event' ? 'active' : '' ?>">
+                                <a href="<?php echo base_url('event') ?>">Event</a>
+                            </li>
+                            <li class="<?php echo $class == 'event_dev' ? 'active' : '' ?>">
+                                <a href="<?php echo base_url('event_dev') ?>">Event Dev</a>
+                            </li>
+                            <li class="<?php echo $class == 'user' ? 'active' : '' ?>">
+                                <a href="<?php echo base_url('user') ?>">User</a>
+                            </li>
+                            <li class="<?php echo $class == 'user_dev' ? 'active' : '' ?>">
+                                <a href="<?php echo base_url('user_dev') ?>">User Dev</a>
+                            </li>
                         </ul>
                         <ul class="nav navbar-nav navbar-right">
                             <li><a href="<?php echo base_url('signin/out') ?>">Signout</a></li>
@@ -55,8 +68,6 @@
                         <th>App Version</th>
                         <th>Device Type</th>
                         <th>Country</th>
-<!--                        <th>Create Time</th>
-                        <th>Update Time</th>-->
                         <th style="width:150px;">Action</th>
                     </tr>
                 </thead>
@@ -73,8 +84,6 @@
                         <th>App Version</th>
                         <th>Device Type</th>
                         <th>Country</th>
-<!--                        <th>Create Time</th>
-                        <th>Update Time</th>-->
                         <th>Action</th>
                     </tr>
                 </tfoot>
@@ -97,7 +106,7 @@
 
                         // Load data for the table's content from an Ajax source
                         "ajax": {
-                            "url": "<?php echo site_url('user/ajax_list') ?>",
+                            "url": "<?php echo site_url($class.'/ajax_list') ?>",
                             "type": "POST"
                         },
                         //Set column definition initialisation properties.
@@ -125,7 +134,7 @@
 
                     //Ajax Load data from ajax
                     $.ajax({
-                        url: "<?php echo site_url('user/ajax_edit/') ?>/" + id,
+                        url: "<?php echo site_url($class.'/ajax_edit/') ?>/" + id,
                         type: "GET",
                         dataType: "JSON",
                         success: function (data)
@@ -164,10 +173,10 @@
                     var url;
                     if (save_method == 'add')
                     {
-                        url = "<?php echo site_url('user/ajax_add') ?>";
+                        url = "<?php echo site_url($class.'/ajax_add') ?>";
                     } else
                     {
-                        url = "<?php echo site_url('user/ajax_update') ?>";
+                        url = "<?php echo site_url($class.'/ajax_update') ?>";
                     }
 
                     // ajax adding data to database
@@ -195,7 +204,7 @@
                     {
                         // ajax delete data to database
                         $.ajax({
-                            url: "<?php echo site_url('user/ajax_delete') ?>/" + id,
+                            url: "<?php echo site_url($class.'/ajax_delete') ?>/" + id,
                             type: "POST",
                             dataType: "JSON",
                             success: function (data)
@@ -275,18 +284,6 @@
                                         <input name="country" placeholder="Country" class="form-control" type="text">
                                     </div>
                                 </div>
-<!--                                <div class="form-group">
-                                    <label class="control-label col-md-3">Create Time</label>
-                                    <div class="col-md-9">
-                                        <input name="create_time" placeholder="yyyy-mm-dd hh:ii:ss" class="form-control" type="datetime">
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label class="control-label col-md-3">Update Time</label>
-                                    <div class="col-md-9">
-                                        <input name="update_time" placeholder="yyyy-mm-dd hh:ii:ss" class="form-control" type="datetime">
-                                    </div>
-                                </div>-->
                             </div>
                         </form>
                     </div>

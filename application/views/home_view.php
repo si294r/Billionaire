@@ -27,9 +27,22 @@
                     </div>
                     <div id="navbar" class="navbar-collapse collapse">
                         <ul class="nav navbar-nav">
-                            <li class="active"><a href="<?php echo base_url('home') ?>">Home</a></li>
-                            <li><a href="<?php echo base_url('event') ?>">Event</a></li>
-                            <li><a href="<?php echo base_url('user') ?>">User</a></li>
+                            <?php $class = strtolower($this->router->fetch_class()); ?>
+                            <li class="<?php echo $class == 'home' ? 'active' : '' ?>">
+                                <a href="<?php echo base_url('home') ?>">Home</a>
+                            </li>
+                            <li class="<?php echo $class == 'event' ? 'active' : '' ?>">
+                                <a href="<?php echo base_url('event') ?>">Event</a>
+                            </li>
+                            <li class="<?php echo $class == 'event_dev' ? 'active' : '' ?>">
+                                <a href="<?php echo base_url('event_dev') ?>">Event Dev</a>
+                            </li>
+                            <li class="<?php echo $class == 'user' ? 'active' : '' ?>">
+                                <a href="<?php echo base_url('user') ?>">User</a>
+                            </li>
+                            <li class="<?php echo $class == 'user_dev' ? 'active' : '' ?>">
+                                <a href="<?php echo base_url('user_dev') ?>">User Dev</a>
+                            </li>
                         </ul>
                         <ul class="nav navbar-nav navbar-right">
                             <li><a href="<?php echo base_url('signin/out') ?>">Signout</a></li>
