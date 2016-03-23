@@ -100,6 +100,7 @@ class Event extends CI_Controller {
 
         $end_time = microtime(true);
         $json['execute_time'] = $end_time - $start_time;
+        $json['memory_usage'] = memory_get_usage(true);
         echo json_encode($json);
     }
 
