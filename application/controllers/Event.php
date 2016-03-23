@@ -84,6 +84,7 @@ class Event extends CI_Controller {
     }
 
     public function get($device, $version, $debug = 0) {
+        $start_time = microtime(true);
         if ($debug == 1) {
             $this->event->table = str_replace("_prod", "_dev", $this->db->database) . "." . $this->event->table;
         }
@@ -97,6 +98,8 @@ class Event extends CI_Controller {
             $json['event_time']['end'] = $data->end_date;
         }
 
+        $end_time = microtime(true);
+        $json['execute_time'] = $end_time - $start_time;
         echo json_encode($json);
     }
 
