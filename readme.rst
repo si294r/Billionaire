@@ -24,10 +24,10 @@ a2enmod rewrite
 edit /etc/apache2/apache.conf :
 *******************************
 
-<Directory /var/www/>
-        Options Indexes FollowSymLinks
-        AllowOverride All
-        Require all granted
+<Directory /var/www/>  
+        Options Indexes FollowSymLinks  
+        AllowOverride All  
+        Require all granted  
 </Directory>
 
 *****************************************
@@ -46,10 +46,10 @@ $cfg['Servers'][$i]['AllowNoPassword'] = TRUE;
 Setup mysql privileges 
 **********************
 
-MariaDB [mysql]> select host, user, password, plugin from user where host='localhost' and user='root';
-+-----------+------+-------------------------------------------+-----------------------+
-| host      | user | password                                  | plugin                |
-+-----------+------+-------------------------------------------+-----------------------+
-| localhost | root | *2470C0C06DEE42FD1618BB99005ADCA2EC9D1E19 | mysql_native_password |
-+-----------+------+-------------------------------------------+-----------------------+
+MariaDB [mysql]> select host, user, password, plugin from user where host='localhost' and user='root';  
++-----------+------+-------------------------------------------+-----------------------+  
+| host      | user | password                                  | plugin                |  
++-----------+------+-------------------------------------------+-----------------------+  
+| localhost | root | *2470C0C06DEE42FD1618BB99005ADCA2EC9D1E19 | mysql_native_password |  
++-----------+------+-------------------------------------------+-----------------------+  
 
