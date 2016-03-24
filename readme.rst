@@ -18,14 +18,14 @@ sudo apt-get install phpmyadmin
 enable mod-rewrite :
 ********************
 
-a2enmod rewrite
+`a2enmod rewrite`
 
 *******************************
 edit /etc/apache2/apache.conf :
 *******************************
 
-<Directory /var/www/>  
-        Options Indexes FollowSymLinks  
+`<Directory /var/www/>`  
+        `Options Indexes FollowSymLinks`  
         AllowOverride All  
         Require all granted  
 </Directory>
