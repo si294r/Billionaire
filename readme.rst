@@ -1,70 +1,55 @@
 ###################
-What is CodeIgniter
+Installation
 ###################
 
-CodeIgniter is an Application Development Framework - a toolkit - for people
-who build web sites using PHP. Its goal is to enable you to develop projects
-much faster than you could if you were writing code from scratch, by providing
-a rich set of libraries for commonly needed tasks, as well as a simple
-interface and logical structure to access these libraries. CodeIgniter lets
-you creatively focus on your project by minimizing the amount of code needed
-for a given task.
+sudo apt-get update
 
-*******************
-Release Information
-*******************
+sudo apt-get install apache2
 
-This repo contains in-development code for future releases. To download the
-latest stable release please visit the `CodeIgniter Downloads
-<https://codeigniter.com/download>`_ page.
+sudo apt-get install php5 
 
-**************************
-Changelog and New Features
-**************************
+sudo apt-get install mariadb-server
 
-You can find a list of all changes for each release in the `user
-guide change log <https://github.com/bcit-ci/CodeIgniter/blob/develop/user_guide_src/source/changelog.rst>`_.
+sudo apt-get install php5-mysql
 
-*******************
-Server Requirements
-*******************
+sudo apt-get install phpmyadmin
 
-PHP version 5.4 or newer is recommended.
+********************
+enable mod-rewrite :
+********************
 
-It should work on 5.2.4 as well, but we strongly advise you NOT to run
-such old versions of PHP, because of potential security and performance
-issues, as well as missing features.
+a2enmod rewrite
 
-************
-Installation
-************
+*******************************
+edit /etc/apache2/apache.conf :
+*******************************
 
-Please see the `installation section <https://codeigniter.com/user_guide/installation/index.html>`_
-of the CodeIgniter User Guide.
+<Directory /var/www/>
+        Options Indexes FollowSymLinks
+        AllowOverride All
+        Require all granted
+</Directory>
 
-*******
-License
-*******
+*****************************************
+edit /etc/mysql/mariadb.conf.d/mysqld.cnf
+*****************************************
 
-Please see the `license
-agreement <https://github.com/bcit-ci/CodeIgniter/blob/develop/user_guide_src/source/license.rst>`_.
+max_connections        = 50000
 
-*********
-Resources
-*********
+***********************************
+edit /etc/phpmyadmin/config.inc.php
+***********************************
 
--  `User Guide <https://codeigniter.com/docs>`_
--  `Language File Translations <https://github.com/bcit-ci/codeigniter3-translations>`_
--  `Community Forums <http://forum.codeigniter.com/>`_
--  `Community Wiki <https://github.com/bcit-ci/CodeIgniter/wiki>`_
--  `Community IRC <https://webchat.freenode.net/?channels=%23codeigniter>`_
+$cfg['Servers'][$i]['AllowNoPassword'] = TRUE;
 
-Report security issues to our `Security Panel <mailto:security@codeigniter.com>`_
-or via our `page on HackerOne <https://hackerone.com/codeigniter>`_, thank you.
+**********************
+Setup mysql privileges 
+**********************
 
-***************
-Acknowledgement
-***************
+MariaDB [mysql]> select host, user, password, plugin from user where host='localhost' and user='root';
++-----------+------+-------------------------------------------+-----------------------+
+| host      | user | password                                  | plugin                |
++-----------+------+-------------------------------------------+-----------------------+
+| localhost | root | *2470C0C06DEE42FD1618BB99005ADCA2EC9D1E19 | mysql_native_password |
++-----------+------+-------------------------------------------+-----------------------+
 
-The CodeIgniter team would like to thank EllisLab, all the
-contributors to the CodeIgniter project and you, the CodeIgniter user.
