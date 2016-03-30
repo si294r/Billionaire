@@ -1,17 +1,17 @@
 -- phpMyAdmin SQL Dump
--- version 4.5.2
+-- version 4.4.13.1deb1
 -- http://www.phpmyadmin.net
 --
--- Host: localhost
--- Generation Time: Mar 21, 2016 at 08:53 AM
--- Server version: 10.1.10-MariaDB
--- PHP Version: 5.5.33
+-- Host: localhost:3306
+-- Generation Time: Mar 29, 2016 at 10:43 PM
+-- Server version: 10.0.23-MariaDB-0ubuntu0.15.10.1
+-- PHP Version: 5.6.11-1ubuntu3.1
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
 
 --
--- Database: `test`
+-- Database: `Billionaire_prod`
 --
 
 -- --------------------------------------------------------
@@ -20,12 +20,19 @@ SET time_zone = "+00:00";
 -- Table structure for table `admin`
 --
 
-CREATE TABLE `admin` (
+CREATE TABLE IF NOT EXISTS `admin` (
   `admin_id` int(11) NOT NULL,
   `username` varchar(50) NOT NULL,
   `password` varchar(100) NOT NULL,
   `status` varchar(10) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `admin`
+--
+
+INSERT INTO `admin` (`admin_id`, `username`, `password`, `status`) VALUES
+(1, 'admin', '5f4dcc3b5aa765d61d8327deb882cf99', 'Active');
 
 --
 -- Indexes for dumped tables
@@ -45,4 +52,4 @@ ALTER TABLE `admin`
 -- AUTO_INCREMENT for table `admin`
 --
 ALTER TABLE `admin`
-  MODIFY `admin_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `admin_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;

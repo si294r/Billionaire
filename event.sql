@@ -1,17 +1,17 @@
 -- phpMyAdmin SQL Dump
--- version 4.5.2
+-- version 4.4.13.1deb1
 -- http://www.phpmyadmin.net
 --
--- Host: localhost
--- Generation Time: Mar 21, 2016 at 08:54 AM
--- Server version: 10.1.10-MariaDB
--- PHP Version: 5.5.33
+-- Host: localhost:3306
+-- Generation Time: Mar 29, 2016 at 10:44 PM
+-- Server version: 10.0.23-MariaDB-0ubuntu0.15.10.1
+-- PHP Version: 5.6.11-1ubuntu3.1
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
 
 --
--- Database: `test`
+-- Database: `Billionaire_prod`
 --
 
 -- --------------------------------------------------------
@@ -20,7 +20,7 @@ SET time_zone = "+00:00";
 -- Table structure for table `event`
 --
 
-CREATE TABLE `event` (
+CREATE TABLE IF NOT EXISTS `event` (
   `event_id` int(11) NOT NULL,
   `event_name` varchar(50) NOT NULL,
   `start_date` date NOT NULL,
@@ -28,7 +28,16 @@ CREATE TABLE `event` (
   `device` varchar(10) NOT NULL,
   `version` varchar(10) NOT NULL,
   `status` varchar(10) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `event`
+--
+
+INSERT INTO `event` (`event_id`, `event_name`, `start_date`, `end_date`, `device`, `version`, `status`) VALUES
+(2, 'Test Event 1', '2016-03-18', '2016-03-25', 'Android', '1.0', 'Inactive'),
+(3, 'Tahun Baru', '2016-01-02', '2016-01-10', 'Android', '1.1', 'Active'),
+(5, 'Test Event 2', '2016-03-21', '2016-03-22', 'Android', '1.2', 'Active');
 
 --
 -- Indexes for dumped tables
@@ -48,4 +57,4 @@ ALTER TABLE `event`
 -- AUTO_INCREMENT for table `event`
 --
 ALTER TABLE `event`
-  MODIFY `event_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `event_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=6;
