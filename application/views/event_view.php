@@ -237,13 +237,13 @@
                                 <div class="form-group">
                                     <label class="control-label col-md-3">Start Date</label>
                                     <div class="col-md-9">
-                                        <input name="start_date" placeholder="yyyy-mm-dd" class="form-control" type="date">
+                                        <input name="start_date" placeholder="<?php echo gmdate('Y-m-d h:i:s') ?>" class="form-control" type="datetime">
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label class="control-label col-md-3">End Date</label>
                                     <div class="col-md-9">
-                                        <input name="end_date" placeholder="yyyy-mm-dd" class="form-control" type="date">
+                                        <input name="end_date" placeholder="<?php echo gmdate('Y-m-d h:i:s') ?>" class="form-control" type="datetime">
                                     </div>
                                 </div>
                                 <div class="form-group">
