@@ -2,7 +2,7 @@
 1. Ubuntu 14.04 : ubuntu-14.04.4-server-amd64.iso
 2. MongoDB 3.2.4
 
-#### Update /etc/mongod.conf both on 10.100.8.121 and then restart mongod
+#### Update /etc/mongod.conf on 10.100.8.121 and then restart mongod
 ```
 # network interfaces
 net:
@@ -18,7 +18,7 @@ replication:
    #enableMajorityReadConcern: <boolean>
 ```
 
-#### Update /etc/mongod.conf both on 10.100.8.133 and then restart mongod
+#### Update /etc/mongod.conf on 10.100.8.133 and then restart mongod
 ```
 # network interfaces
 net:
