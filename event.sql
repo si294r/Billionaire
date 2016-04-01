@@ -23,8 +23,8 @@ SET time_zone = "+00:00";
 CREATE TABLE IF NOT EXISTS `event` (
   `event_id` int(11) NOT NULL,
   `event_name` varchar(50) NOT NULL,
-  `start_date` date NOT NULL,
-  `end_date` date NOT NULL,
+  `start_date` datetime NOT NULL,
+  `end_date` datetime NOT NULL,
   `device` varchar(10) NOT NULL,
   `version` varchar(10) NOT NULL,
   `status` varchar(10) NOT NULL
@@ -35,9 +35,9 @@ CREATE TABLE IF NOT EXISTS `event` (
 --
 
 INSERT INTO `event` (`event_id`, `event_name`, `start_date`, `end_date`, `device`, `version`, `status`) VALUES
-(2, 'Test Event 1', '2016-03-18', '2016-03-25', 'Android', '1.0', 'Inactive'),
-(3, 'Tahun Baru', '2016-01-02', '2016-01-10', 'Android', '1.1', 'Active'),
-(5, 'Test Event 2', '2016-03-21', '2016-03-22', 'Android', '1.2', 'Active');
+(2, 'Test Event 1', '2016-03-18 00:00:00', '2016-03-25 00:00:00', 'Android', '1.0', 'Inactive'),
+(3, 'Tahun Baru', '2016-01-02 00:00:00', '2016-01-10 00:00:00', 'Android', '1.1', 'Active'),
+(5, 'Test Event 2', '2016-03-21 00:00:00', '2016-03-22 00:00:00', 'Android', '1.2', 'Active');
 
 --
 -- Indexes for dumped tables
